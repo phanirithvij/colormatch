@@ -7,6 +7,7 @@ import (
 	"math"
 
 	"github.com/RobCherry/vibrant"
+	"github.com/phanirithvij/colormatch/colormatch/models"
 )
 
 // RGBA non-pre alpha multiplied rgba color
@@ -118,4 +119,17 @@ func (rgb RGBA) String() string {
 // Packed convert to vibrant rgbint struct
 func (rgb RGBA) Packed() vibrant.RGBAInt {
 	return vibrant.RGBAIntModel.Convert(rgb.NRGBA).(vibrant.RGBAInt)
+}
+
+// FromColorModel Color from colormodel
+func FromColorModel(c models.ColorModel) RGBA {
+	rgb := RGBA{
+		NRGBA: color.NRGBA{},
+	}
+	data, err := json.Marshal(c.RGB)
+	if err != nil {
+		return rgb
+	}
+	err = json.Unmarshal(data, &rgb)
+	return rgb
 }

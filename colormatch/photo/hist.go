@@ -35,6 +35,18 @@ type HistEntry struct {
 	Lab   col.Lab
 }
 
+// NewHistEntry build hist entry from color
+func NewHistEntry(color col.Color) (e *HistEntry) {
+	e = &HistEntry{
+		Count: 0,
+		RGB:   color.RGB(),
+		Hex:   color.Hex(),
+		HSB:   color.HSB(),
+		Lab:   color.Lab(),
+	}
+	return e
+}
+
 // GetHistogramData get the histogram data
 // TODO functional arguments
 func GetHistogramData(

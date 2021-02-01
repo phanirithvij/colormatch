@@ -1,4 +1,4 @@
-package utils
+package scripts
 
 // file: lib/find_furthest_colors.rb
 
@@ -9,7 +9,9 @@ package utils
 // It turns out the greatest distance, in LAB colorspace, is ~256,
 // the distance between pure blue #0000FF and pure green #00FF00.
 
-import "github.com/phanirithvij/colormatch/colormatch/color"
+import (
+	"github.com/phanirithvij/colormatch/colormatch/color"
+)
 
 // MaxDist max distance data
 type MaxDist struct {
@@ -25,7 +27,7 @@ func compareAllInDB() MaxDist {
 
 	for _, c1 := range colors {
 		for _, c2 := range colors {
-			dist := Dist(c1, c2, "LAB")
+			dist := color.Dist(c1, c2, color.LabMode)
 			if dist > maxDist {
 				maxDist = dist
 				maxColors[0] = c1
